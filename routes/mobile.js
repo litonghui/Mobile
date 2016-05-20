@@ -25,5 +25,11 @@ router.use('/focus.html?',function(req,res){
 });*/
 router.use('/setting.html?',function(req,res){
     config.saveConfig(req);
-})
+});
+
+router.use('/getting.html?',function(req,res){
+    config.getConfig(req);
+});
+
+
 module.exports = router;

@@ -2,7 +2,7 @@
  * Created by litonghui on 2016/5/19.
  */
 var mongoose = require('mongoose');
-var url = 'mongodb://localhost/ashion';
+var url = 'mongodb://localhost/li';
 mongoose.connect(url);
 
 var Schema = mongoose.Schema;
@@ -20,10 +20,25 @@ var moive = new Movie({
     title: '黑衣人三',
     doctor: '史密斯',
     country: '美国',
-    language: '英语',
+    language: 'English',
 })
 
-function getFromDb(info){
+function getFromDb(){
+/*    Movie.find({},function(err,doce){
+         if(err){
+             console.log('读取失败')
+             return;
+         }
+    console.log("result:  "+doce);
+    });*/
+
+    Movie.findOne({language:"English"},function(err,dco){
+        if(err){
+            console.log('读取失败')
+            return;
+        }
+       console.log("one_result  "+dco);
+    });
 }
 function writeToDb(){
     moive.save(function(err) {
