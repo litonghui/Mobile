@@ -4,7 +4,7 @@
 var express = require('express');
 var reader = require('../modules/local');
 var service = require('../modules/remote');
-
+var config = require('../modules/config');
 var router = express.Router();
 
 
@@ -18,9 +18,12 @@ router.use('/focus.html?',function(req,res){
         res.send(result);
     });
 });
-router.use('/',function(req,res){
+/*router.use('/',function(req,res){
     service.getrequest(req.url,function(result){
         res.send(result);
     });
-});
+});*/
+router.use('/setting.html?',function(req,res){
+    config.saveConfig(req);
+})
 module.exports = router;
