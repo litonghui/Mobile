@@ -2,9 +2,11 @@
  * Created by litonghui on 2016/5/18.
  */
 var express = require('express');
-var reader = require('../modules/local');
-var service = require('../modules/remote');
-var config = require('../modules/config');
+var reader = require('../models/requestdb/local');
+var service = require('../models/requestdb/remote');
+var dbhelper = require('../models/mongodb/dbhelper')
+
+
 var router = express.Router();
 
 
@@ -24,12 +26,15 @@ router.use('/focus.html?',function(req,res){
     });
 });*/
 router.use('/setting.html?',function(req,res){
-    config.saveConfig(req);
+    dbhelper.setConfig(req,function(result){
+        res.send(result);
+    });
 });
 
 router.use('/getting.html?',function(req,res){
-    config.getConfig(req);
+   dbhelper.getConfig(req,function(result){
+       res.send(result);
+   });
 });
-
 
 module.exports = router;
